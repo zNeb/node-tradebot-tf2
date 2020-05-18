@@ -103,8 +103,11 @@ io.on('connection', (socket) => {
             socket.emit('bots floats', Trade.getFloatValues())
         })
     })
-    socket.on('get pricelist', () => {
-        socket.emit('pricelist', Trade.getPriceList())
+    socket.on('get buypricelist', () => {
+        socket.emit('buypricelist', Trade.getBuyPriceList())
+    })
+	socket.on('get sellpricelist', () => {
+        socket.emit('sellpricelist', Trade.getSellPriceList())
     })
     socket.on('get rates', () => {
         socket.emit('rates', {

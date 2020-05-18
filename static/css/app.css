@@ -1,10 +1,6 @@
 body {
     font-family: 'Source Sans Pro', sans-serif;
-    min-width: 1300px;
-    background: url(../img/bg.png) repeat;
-}
-#app {
-    margin-top: 60px;
+    background: #fbfbfb;
 }
 hr {
     opacity: 0.25;
@@ -22,6 +18,10 @@ hr {
     height: 300px;
     overflow: auto;
     display: block;
+}
+.offer-text {
+    padding: 10px;
+	text-align: center;
 }
 .csgo-items.high {
     height: 420px;
@@ -95,6 +95,7 @@ hr {
     padding: 1px 3px;
     z-index: 2;
 }
+
 .csgo-item--price {
     position: absolute;
     bottom: 5px; left: 10px; right: 0;
@@ -139,6 +140,20 @@ hr {
 }
 .navbar {
     border-radius: 0;
+}
+.navbar-custom {
+    border-color: #e7e7e7;
+    background: url(../img/bg.png) repeat;
+}
+.navbar-custom .navbar-toggle {
+    border-color: #ddd;
+}
+.navbar-custom .navbar-toggle .icon-bar {
+    background-color: #888;
+}
+.nav-logo {
+    width: 160px;
+	margin: 5px 20px 5px 5px;
 }
 .has-avatar {
     padding-left: 60px !important;

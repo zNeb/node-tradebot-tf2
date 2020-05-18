@@ -2,7 +2,8 @@ $(function() {
     var app = new Vue({
         el: '#app',
         data: {
-            priceList: {},
+            buyPriceList: {},
+			sellPriceList: {},
             rates: {
                 user: {},
                 bot: {}
@@ -105,10 +106,10 @@ $(function() {
                             for(var y in bot.items) {
                                 var item = bot.items[y];
                                 item.bot = i;
-                                if(app.priceList[item.data.market_hash_name] <= app.rates.trash) {
-                                    item.price = (app.priceList[item.data.market_hash_name] * app.rates.bot['trash']).toFixed(2);
+                                if(app.sellPriceList[item.data.market_hash_name] <= app.rates.trash) {
+                                    item.price = (app.sellPriceList[item.data.market_hash_name] * app.rates.bot['trash']).toFixed(2);
                                 } else {
-                                    item.price = (app.priceList[item.data.market_hash_name] * app.rates.bot[item.item_type.name]).toFixed(2);
+                                    item.price = (app.sellPriceList[item.data.market_hash_name] * app.rates.bot[item.item_type.name]).toFixed(2);
                                 }
                                 botInventory.push(item);
                             }
@@ -217,12 +218,13 @@ $(function() {
 
 
     var socket = io();
-    socket.emit('get pricelist');
+    socket.emit('get buypricelist');
+	socket.emit('get sellpricelist');
     socket.emit('get rates');
 
     socket.on('site', function(data) {
         app.site = data;
-        window.document.title = data.header + ' | Web-based CS:GO Trading Bot';
+        window.document.title = data.header + ' × TF2 Trading Bot';
     });
 
     socket.on('offer status', function(data) {
@@ -260,10 +262,10 @@ $(function() {
             var userInventory = [];
             for(var i in data.items) {
                 var item = data.items[i];
-                if(app.priceList[item.data.market_hash_name] <= app.rates.trash) {
-                    item.price = (app.priceList[item.data.market_hash_name] * app.rates.user['trash']).toFixed(2);
+                if(app.buyPriceList[item.data.market_hash_name] <= app.rates.trash) {
+                    item.price = (app.buyPriceList[item.data.market_hash_name] * app.rates.user['trash']).toFixed(2);
                 } else {
-                    item.price = (app.priceList[item.data.market_hash_name] * app.rates.user[item.item_type.name]).toFixed(2);
+                    item.price = (app.buyPriceList[item.data.market_hash_name] * app.rates.user[item.item_type.name]).toFixed(2);
                 }
                 userInventory.push(item);
             }
@@ -302,10 +304,10 @@ $(function() {
             for(var y in bot.items) {
                 var item = bot.items[y];
                 item.bot = i;
-                if(app.priceList[item.data.market_hash_name] <= app.rates.trash) {
-                    item.price = (app.priceList[item.data.market_hash_name] * app.rates.bot['trash']).toFixed(2);
+                if(app.sellPriceList[item.data.market_hash_name] <= app.rates.trash) {
+                    item.price = (app.sellPriceList[item.data.market_hash_name] * app.rates.bot['trash']).toFixed(2);
                 } else {
-                    item.price = (app.priceList[item.data.market_hash_name] * app.rates.bot[item.item_type.name]).toFixed(2);
+                    item.price = (app.sellPriceList[item.data.market_hash_name] * app.rates.bot[item.item_type.name]).toFixed(2);
                 }
                 botInventory.push(item);
             }
@@ -320,8 +322,13 @@ $(function() {
         }
         app.botInventory = botInventory;
     });
-    socket.on('pricelist', function(prices) {
-        app.priceList = Object.assign({}, app.priceList, prices);
+    socket.on('buypricelist', function(prices) {
+        app.buyPriceList = Object.assign({}, app.buyPriceList, prices);
+
+        socket.emit('get bots inv');
+    });
+	socket.on('sellpricelist', function(prices) {
+        app.sellPriceList = Object.assign({}, app.sellPriceList, prices);
 
         socket.emit('get bots inv');
     });

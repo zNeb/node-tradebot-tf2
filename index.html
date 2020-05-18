@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Web-based CS:GO Trading Bot</title>
+    <title>Gomu Trade × TF2 Trading Bot</title>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="/static/css/bootstrap.min.css">
@@ -23,20 +23,65 @@
 </head>
 <body>
     <div id="app">
-        <div class="container-fluid">
+        <nav class="navbar navbar-custom">
+            <div class="container-fluid">
+              <!-- Brand and toggle get grouped for better mobile display -->
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <img class="nav-logo" src="/static/img/logo.png" alt="Fortress Trading">
+            </div>
+    
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="#" data-toggle="modal" data-target="#about">About</a></li>
+                <li><a href="https://steamcommunity.com/groups/FortressTrade" target="_blank">Steam Group</a><li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                    <div v-if=" ! user">
+                        <a href="/auth/steam">
+                            <img src="/static/img/steam.png" class="img-responsive" alt="Steam Signin" style="margin:9px 5px 5px;height: 30px;">
+                        </a>
+                    </div>
+                    <div v-else>
+                        <ul class="nav navbar-nav navbar-left">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle has-avatar" data-toggle="dropdown">
+                                    <img class="img-responsive img-avatar" :src="user.photos[0].value" alt="Avatar"> {{ user.displayName }}
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-right">
+                                    <li><a href="#" data-toggle="modal" data-target="#tradelink">Change tradelink</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="/logout">Log out</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </a>
+            </ul>
+            </div>
+        </div>
+        </nav>
+        <div class="container-fluid" style="min-width:1200px;">
             <div class="row">
                 <div class="col-xs-5">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h3 class="panel-title">
-                                <span><span class="well well-sm"><strong>Your offer</strong></span></span>
+                                <span><strong>Your offer</strong></span>
                                 <span class="price pull-right">
-                                    <span class="well well-sm">${{ userInventorySelectedValue.toFixed(2) }}</span>
+                                    <span>{{ userInventorySelectedValue.toFixed(2) }} Ref</span>
                                 </span>
                             </h3>
                         </div>
                         <div class="csgo-items">
-                            <div class="well text-center">
+                            <div class="offer-text">
                                 <strong>&#9660; Select items below to remove them from the offer. &#9660;</strong>
                             </div>
                             <div class="csgo-item csgo-item--rare"
@@ -58,7 +103,7 @@
                         <div class="panel-heading">
                             <h3 class="panel-title">
                                 <div class="form-inline text-right">
-                                    <a href="#" class="btn btn-default disabled pull-left">Your inventory</a>
+                                    <a href="#" class="btn btn-default disabled pull-left inv">Your inventory</a>
                                     <div class="form-group">
                                         <input type="text" class="form-control" placeholder="Search For Items" v-on:keyup="searchInventory('user', $event.target.value)">
                                         <div class="input-group">
@@ -79,7 +124,7 @@
                             </h3>
                         </div>
                         <div class="csgo-items high">
-                            <div class="well text-center">
+                            <div class="offer-text">
                                 <strong>&#9660; Select items below to place them in the offer. &#9660;</strong>
                             </div>
                             <div v-if=" ! userInventory.error && userInventory.length">
@@ -88,13 +133,11 @@
                                     v-for="item in userInventory"
                                     v-if=" ! item.hidden && userInventorySelected.indexOf(item.assetid) === -1"
                                     v-on:click="addItem('user', item.assetid, item.price)"
-                                    :disabled="item.price <= rates.ignore"
                                 >
                                     <div class="csgo-item--title">{{ item.data.market_hash_name }}</div>
                                     <div class="csgo-item--st" v-if="item.data.market_hash_name.indexOf('StatTrak') !== -1">ST</div>
                                     <div class="csgo-item--wear" v-if="item.item_wear">{{ item.item_wear }}</div>
-                                    <div class="csgo-item--price" v-if="item.price > rates.ignore">${{ item.price }}</div>
-                                    <div class="csgo-item--price" v-else>Too low</div>
+                                    <div class="csgo-item--price" v-if="item.price">{{ item.price }} Ref</div>
                                     <div class="csgo-item--bg" :style="`background-image:url(https://steamcommunity-a.akamaihd.net/economy/image/${item.data.image});`"></div>
                                 </div>
                             </div>
@@ -129,15 +172,11 @@
                 </div>
                 <!--/.col-->
                 <div class="col-xs-2">
-                    <img src="/static/img/logo.png" class="img-responsive" alt="" style="margin-top: -42px;">
                     <hr>
                     <div v-if=" ! user">
                         <div class="alert alert-info">
                             <strong>You need to sign in before you can send trades.</strong>
                         </div>
-                        <a href="/auth/steam">
-                            <img src="https://steamcommunity-a.akamaihd.net/public/images/signinthroughsteam/sits_01.png" class="img-responsive" alt="" style="margin:auto;">
-                        </a>
                     </div>
                     <div v-else>
                         <nav class="navbar navbar-default">
@@ -165,51 +204,11 @@
                         <a href="#" class="btn btn-danger btn-lg btn-block" disabled v-else>Not enough value</a>
                     </div>
                     <hr>
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <h3 class="panel-title text-center">Market Rates</h3>
-                        </div>
-                        <table class="table table-bordered table-condensed text-center">
-                            <tbody>
-                                <tr>
-                                    <td colspan="3">
-                                        <a href="#" data-toggle="modal" data-target="#percentages">What are these %'s'?</a>
-                                    </td>
-                                </tr>
-                                <tr class="success">
-                                    <td>{{ parseInt(rates.user.key * 100) }}%</td>
-                                    <td>Keys</td>
-                                    <td>{{ parseInt(rates.bot.key * 100) }}%</td>
-                                </tr>
-                                <tr class="danger">
-                                    <td>{{ parseInt(rates.user.knife * 100) }}%</td>
-                                    <td>Knives</td>
-                                    <td>{{ parseInt(rates.bot.knife * 100) }}%</td>
-                                </tr>
-                                <tr class="warning">
-                                    <td>{{ parseInt(rates.user.rare_skin * 100) }}%</td>
-                                    <td>Rare Skin</td>
-                                    <td>{{ parseInt(rates.bot.rare_skin * 100) }}%</td>
-                                </tr>
-                                <tr class="info">
-                                    <td>{{ parseInt(rates.user.weapon * 100) }}%</td>
-                                    <td>Weapons</td>
-                                    <td>{{ parseInt(rates.bot.weapon * 100) }}%</td>
-                                </tr>
-                                <tr class="active">
-                                    <td>{{ parseInt(rates.user.misc * 100) }}%</td>
-                                    <td>Misc</td>
-                                    <td>{{ parseInt(rates.bot.misc * 100) }}%</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
                     <hr>
                     <a href="#" class="btn btn-success btn-lg btn-block" v-on:click="reloadInventories" v-if=" ! disableReload">Reload inventories</a>
                     <a href="#" class="btn btn-danger btn-lg btn-block" disabled v-else>Reload inventories</a>
                     <div class="text-center" style="margin-top: 36px;">
                         <strong>{{ site.copyrights }}</strong>
-                        <div>Prices and inventory loading provided by <a href="https://steamapis.com" target="_blank">SteamApis.com</a></div>
                     </div>
                 </div>
                 <!--/.col-->
@@ -218,15 +217,15 @@
                         <div class="panel-heading">
                             <h3 class="panel-title">
                                 <span class="price">
-                                    <span class="well well-sm">${{ botInventorySelectedValue.toFixed(2) }}</span>
+                                    <span>{{ botInventorySelectedValue.toFixed(2) }} Ref</span>
                                 </span>
                                 <span class="pull-right">
-                                    <span class="well well-sm"><strong>Bot's offer</strong></span>
+                                    <span><strong>Bot's offer</strong></span>
                                 </span>
                             </h3>
                         </div>
                         <div class="csgo-items">
-                            <div class="well text-center">
+                            <div class="offer-text">
                                 <strong>&#9660; Select items below to remove them from the offer. &#9660;</strong>
                             </div>
                             <div class="csgo-item csgo-item--rare"
@@ -238,7 +237,7 @@
                                 <div class="csgo-item--title">{{ item.data.market_hash_name }}</div>
                                 <div class="csgo-item--st" v-if="item.data.market_hash_name.indexOf('StatTrak') !== -1">ST</div>
                                 <div class="csgo-item--wear" v-if="item.item_wear">{{ item.item_wear }}</div>
-                                <div class="csgo-item--price">${{ item.price }}</div>
+                                <div class="csgo-item--price">{{ item.price }} Ref</div>
                                 <div class="csgo-item--bg" :style="`background-image:url(https://steamcommunity-a.akamaihd.net/economy/image/${item.data.image});`"></div>
                             </div>
                             <div class="clearfix"></div>
@@ -287,7 +286,7 @@
                             </h3>
                         </div>
                         <div class="csgo-items high">
-                            <div class="well text-center">
+                            <div class="offer-text">
                                 <strong>&#9660; Select items below to place them in the offer. &#9660;</strong>
                             </div>
                             <div v-if=" ! botInventory.error && botInventory.length">
@@ -304,7 +303,7 @@
                                     </div>
                                     <div class="csgo-item--st" v-if="item.data.market_hash_name.indexOf('StatTrak') !== -1">ST</div>
                                     <div class="csgo-item--wear" v-if="item.item_wear">{{ item.item_wear }}</div>
-                                    <div class="csgo-item--price">${{ item.price }}</div>
+                                    <div class="csgo-item--price">{{ item.price }} Ref</div>
                                     <div class="csgo-item--bg" :style="`background-image:url(https://steamcommunity-a.akamaihd.net/economy/image/${item.data.image});`"></div>
                                 </div>
                             </div>
@@ -333,11 +332,11 @@
         </div>
         <!--/.container-fluid-->
 
-        <div class="modal fade" id="percentages">
+        <div class="modal fade" id="about">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-body">
-                        <h3>Price Calculation</h3>
+                        <h3>About</h3>
                         <p>We are trying to get the most accurate prices on the site by analysing the Steam Market. Combined with the Market Rates we can have a stable & varied inventory.</p>
                         <h4>Example</h4>
                         <p>Let's say that you have a knife. The Steam market price of that knife is estimated to $50 and we are giving you 90% of the market price(the Market Rate). The mathematics part is going to look like this:</p>
@@ -418,7 +417,7 @@
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
         m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-    ga('create', 'UA-90308432-1', 'auto');
+    ga('create', 'UA-99004477-20', 'auto');
     ga('send', 'pageview');
     </script>
     <!-- Website script -->
