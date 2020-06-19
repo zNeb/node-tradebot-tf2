@@ -39,8 +39,8 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
-                <li><a href="#" data-toggle="modal" data-target="#about">About</a></li>
-                <li><a href="https://steamcommunity.com/groups/FortressTrade" target="_blank">Steam Group</a><li>
+                <li><a class="nav-link" href="#" data-toggle="modal" data-target="#about">About</a></li>
+                <li><a class="nav-link" href="https://steamcommunity.com/groups/FortressTrade" target="_blank">Steam Group</a><li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                     <div v-if=" ! user">
@@ -93,7 +93,7 @@
                                 <div class="csgo-item--title">{{ item.data.market_hash_name }}</div>
                                 <div class="csgo-item--st" v-if="item.data.market_hash_name.indexOf('StatTrak') !== -1">ST</div>
                                 <div class="csgo-item--wear" v-if="item.item_wear">{{ item.item_wear }}</div>
-                                <div class="csgo-item--price">${{ item.price }}</div>
+                                <div class="csgo-item--price">{{ item.price }} Ref</div>
                                 <div class="csgo-item--bg" :style="`background-image:url(https://steamcommunity-a.akamaihd.net/economy/image/${item.data.image});`"></div>
                             </div>
                             <div class="clearfix"></div>
