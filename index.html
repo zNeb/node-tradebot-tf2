@@ -133,6 +133,7 @@
                                     v-for="item in userInventory"
                                     v-if=" ! item.hidden && userInventorySelected.indexOf(item.assetid) === -1"
                                     v-on:click="addItem('user', item.assetid, item.price)"
+                                    :hidden="isNaN(item.price)"
                                 >
                                     <div class="csgo-item--title">{{ item.data.market_hash_name }}</div>
                                     <div class="csgo-item--st" v-if="item.data.market_hash_name.indexOf('StatTrak') !== -1">ST</div>
