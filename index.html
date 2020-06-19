@@ -295,7 +295,7 @@
                                     v-for="item in botInventory"
                                     v-if=" ! item.hidden && botInventorySelected.indexOf(item.assetid) === -1"
                                     v-on:click="addItem('bot', item.bot, item.assetid, item.price)"
-                                    :disabled="item.price > (parseFloat(userInventorySelectedValue.toFixed(2)) - parseFloat(botInventorySelectedValue.toFixed(2)))"
+                                    :hidden="isNaN(item.price)"
                                 >
                                     <div class="csgo-item--title" v-if="!floats[item.assetid] || !floats[item.assetid].paintwear">{{ item.data.market_hash_name }}</div>
                                     <div class="csgo-item--title" v-else>{{ item.data.market_hash_name }}<br>
