@@ -106,11 +106,7 @@ $(function() {
                             for(var y in bot.items) {
                                 var item = bot.items[y];
                                 item.bot = i;
-                                if(app.sellPriceList[item.data.market_hash_name] <= app.rates.trash) {
-                                    item.price = (app.sellPriceList[item.data.market_hash_name] * app.rates.bot['trash']).toFixed(2);
-                                } else {
-                                    item.price = (app.sellPriceList[item.data.market_hash_name] * app.rates.bot[item.item_type.name]).toFixed(2);
-                                }
+                                item.price = (app.sellPriceList[item.data.market_hash_name] * app.rates.bot[item.item_type.name]).toFixed(2);
                                 botInventory.push(item);
                             }
                         }
@@ -262,11 +258,7 @@ $(function() {
             var userInventory = [];
             for(var i in data.items) {
                 var item = data.items[i];
-                if(app.buyPriceList[item.data.market_hash_name] <= app.rates.trash) {
-                    item.price = (app.buyPriceList[item.data.market_hash_name] * app.rates.user['trash']).toFixed(2);
-                } else {
-                    item.price = (app.buyPriceList[item.data.market_hash_name] * app.rates.user[item.item_type.name]).toFixed(2);
-                }
+                item.price = (app.buyPriceList[item.data.market_hash_name] * app.rates.user[item.item_type.name]).toFixed(2);
                 userInventory.push(item);
             }
             if( ! userInventory.length) {
@@ -304,11 +296,7 @@ $(function() {
             for(var y in bot.items) {
                 var item = bot.items[y];
                 item.bot = i;
-                if(app.sellPriceList[item.data.market_hash_name] <= app.rates.trash) {
-                    item.price = (app.sellPriceList[item.data.market_hash_name] * app.rates.bot['trash']).toFixed(2);
-                } else {
-                    item.price = (app.sellPriceList[item.data.market_hash_name] * app.rates.bot[item.item_type.name]).toFixed(2);
-                }
+                item.price = (app.sellPriceList[item.data.market_hash_name] * app.rates.bot[item.item_type.name]).toFixed(2);
                 botInventory.push(item);
             }
         }

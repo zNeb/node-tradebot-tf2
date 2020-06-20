@@ -111,8 +111,6 @@ io.on('connection', (socket) => {
     })
     socket.on('get rates', () => {
         socket.emit('rates', {
-            ignore: Trade.getIgnorePrice(),
-            trash: Trade.getTrashPrice(),
             user: Trade.getUserRates(),
             bot: Trade.getBotRates(),
         })

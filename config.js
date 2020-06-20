@@ -24,11 +24,10 @@ module.exports = {
     domain: 'example.com',    // Domain name only, follow the example (no http:// & no www & no /)
     website: 'http://example.com',    // Website URL, follow the example (do not add / at the end)
     websitePort: 80,    // Website PORT, don't change it unless you're using a reverse proxy
-    tradeMessage: 'Trade offer from Fortress | If you did not request this offer or the offer looks invalid please decline.', // Quite obvious
+    tradeMessage: 'Trade offer from Fortress.TF | If you did not request this offer or the offer looks invalid please decline.', // Quite obvious
+	ignoreItemsBelow: 0.1, // Ignore items below this price (- shows (Too Low) for user
+    ignoreItemsAbove: 100, // Ignore items Above this price - shows (Too High) for user
     rates: {
-        ignoreItemsBelow: 0.1, // Ignore items below this price (price * rate < ignoreItemsBelow) - shows (Too Low) for user
-		ignoreItemsAbove: 70, // Ignore items Above this price (price * rate < ignoreItemsBelow) - shows (Too Low) for user
-        trashPriceBelow: 0.2,   // Items below this price are considered trash, the trash rate modifier will be applied
         // Items
         user: {
             key: 1,
