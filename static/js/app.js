@@ -63,11 +63,55 @@ $(function() {
                     botInventorySelected.push(assetid);
                     this.botInventorySelected = botInventorySelected;
                     this.botInventorySelectedValue += parseFloat(price);
+                    var TotalRef =  Math.trunc(this.botInventorySelectedValue);
+                    var TotalScrap = (this.botInventorySelectedValue % 1).toFixed(2);
+                    if (TotalScrap > 0.05 && TotalScrap < 0.11) {
+                        TotalScrap = 0.11;
+                    } else if (TotalScrap > 0.11 && TotalScrap < 0.22) {
+                        TotalScrap = 0.22;
+                    } else if (TotalScrap > 0.22 && TotalScrap < 0.33) {
+                        TotalScrap = 0.33;
+                    } else if (TotalScrap > 0.33 && TotalScrap < 0.44) {
+                        TotalScrap = 0.44;
+                    } else if (TotalScrap > 0.44 && TotalScrap < 0.55) {
+                        TotalScrap = 0.55;
+                    } else if (TotalScrap > 0.55 && TotalScrap < 0.66) {
+                        TotalScrap = 0.66;
+                    } else if (TotalScrap > 0.66 && TotalScrap < 0.77) {
+                        TotalScrap = 0.77;
+                    } else if (TotalScrap > 0.77 && TotalScrap < 0.88) {
+                        TotalScrap = 0.88;
+                    } else if (TotalScrap > 0.88 && TotalScrap < 1) {
+                        TotalScrap = 1;
+                    }
+                    this.botInventorySelectedValue = parseFloat(TotalRef) + parseFloat(TotalScrap);
                 } else {
                     var userInventorySelected = this.userInventorySelected;
                     userInventorySelected.push(assetid);
                     this.userInventorySelected = userInventorySelected;
                     this.userInventorySelectedValue += parseFloat(price);
+                    var TotalRef =  Math.trunc(this.userInventorySelectedValue);
+                    var TotalScrap = (this.userInventorySelectedValue % 1).toFixed(2);
+                    if (TotalScrap > 0.05 && TotalScrap < 0.11) {
+                        TotalScrap = 0.11;
+                    } else if (TotalScrap > 0.11 && TotalScrap < 0.22) {
+                        TotalScrap = 0.22;
+                    } else if (TotalScrap > 0.22 && TotalScrap < 0.33) {
+                        TotalScrap = 0.33;
+                    } else if (TotalScrap > 0.33 && TotalScrap < 0.44) {
+                        TotalScrap = 0.44;
+                    } else if (TotalScrap > 0.44 && TotalScrap < 0.55) {
+                        TotalScrap = 0.55;
+                    } else if (TotalScrap > 0.55 && TotalScrap < 0.66) {
+                        TotalScrap = 0.66;
+                    } else if (TotalScrap > 0.66 && TotalScrap < 0.77) {
+                        TotalScrap = 0.77;
+                    } else if (TotalScrap > 0.77 && TotalScrap < 0.88) {
+                        TotalScrap = 0.88;
+                    } else if (TotalScrap > 0.88 && TotalScrap < 1) {
+                        TotalScrap = 1;
+                    }
+                    this.userInventorySelectedValue = parseFloat(TotalRef) + parseFloat(TotalScrap);
                 }
                 this.checkTradeable();
             },
@@ -79,9 +123,53 @@ $(function() {
                 if(who == 'bot') {
                     this.botInventorySelected.splice($.inArray(assetid, this.botInventorySelected),1);
                     this.botInventorySelectedValue -= price;
+                    var TotalRef =  Math.trunc(this.botInventorySelectedValue);
+                    var TotalScrap = (this.botInventorySelectedValue % 1).toFixed(2);
+                    if (TotalScrap > 0.05 && TotalScrap < 0.11) {
+                        TotalScrap = 0;
+                    } else if (TotalScrap > 0.11 && TotalScrap < 0.22) {
+                        TotalScrap = 0.11;
+                    } else if (TotalScrap > 0.22 && TotalScrap < 0.33) {
+                        TotalScrap = 0.22;
+                    } else if (TotalScrap > 0.33 && TotalScrap < 0.44) {
+                        TotalScrap = 0.33;
+                    } else if (TotalScrap > 0.44 && TotalScrap < 0.55) {
+                        TotalScrap = 0.44;
+                    } else if (TotalScrap > 0.55 && TotalScrap < 0.66) {
+                        TotalScrap = 0.55;
+                    } else if (TotalScrap > 0.66 && TotalScrap < 0.77) {
+                        TotalScrap = 0.66;
+                    } else if (TotalScrap > 0.77 && TotalScrap < 0.88) {
+                        TotalScrap = 0.77;
+                    } else if (TotalScrap > 0.88 && TotalScrap < 1) {
+                        TotalScrap = 0.88;
+                    }
+                    this.botInventorySelectedValue = parseFloat(TotalRef) + parseFloat(TotalScrap);
                 } else {
                     this.userInventorySelected.splice($.inArray(assetid, this.userInventorySelected),1);
                     this.userInventorySelectedValue -= price;
+                    var TotalRef =  Math.trunc(this.userInventorySelectedValue);
+                    var TotalScrap = (this.userInventorySelectedValue % 1).toFixed(2);
+                    if (TotalScrap > 0.05 && TotalScrap < 0.11) {
+                        TotalScrap = 0;
+                    } else if (TotalScrap > 0.11 && TotalScrap < 0.22) {
+                        TotalScrap = 0.11;
+                    } else if (TotalScrap > 0.22 && TotalScrap < 0.33) {
+                        TotalScrap = 0.22;
+                    } else if (TotalScrap > 0.33 && TotalScrap < 0.44) {
+                        TotalScrap = 0.33;
+                    } else if (TotalScrap > 0.44 && TotalScrap < 0.55) {
+                        TotalScrap = 0.44;
+                    } else if (TotalScrap > 0.55 && TotalScrap < 0.66) {
+                        TotalScrap = 0.55;
+                    } else if (TotalScrap > 0.66 && TotalScrap < 0.77) {
+                        TotalScrap = 0.66;
+                    } else if (TotalScrap > 0.77 && TotalScrap < 0.88) {
+                        TotalScrap = 0.77;
+                    } else if (TotalScrap > 0.88 && TotalScrap < 1) {
+                        TotalScrap = 0.88;
+                    }
+                    this.userInventorySelectedValue = parseFloat(TotalRef) + parseFloat(TotalScrap);
                     if(this.userInventorySelectedValue <= 0) {
                         this.userInventorySelectedValue = 0;
                     }
