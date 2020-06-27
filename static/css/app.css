@@ -46,14 +46,13 @@ hr {
     margin: 0;
 }
 .csgo-item {
-    width: 18%;
-    min-width: 80px;
+    width: 90px;
     min-height: 80px;
-    background: rgba(0, 0, 0, .05);
+    background: white;
     float: left;
     position: relative;
-    border-bottom: 1px solid rgba(0, 0, 0, .05);
-    border-right: 1px solid rgba(0, 0, 0, .05);
+    margin: 0 0 8px 8px;
+    border-radius: 8px;
 }
 .csgo-item[disabled] {
     pointer-events: none;
@@ -78,34 +77,19 @@ hr {
     z-index: 999;
 }
 .csgo-item--key {
-    background: white;
     border: 3px solid gold;
-    border-radius: 8px;
-    margin: 4px;
 }
 .csgo-item--strange {
-    background: white;
     border: 3px solid #CF6A32;
-    border-radius: 8px;
-    margin: 4px;
 }
 .csgo-item--genuine {
-    background: white;
     border: 3px solid #4D7455;
-    border-radius: 8px;
-    margin: 4px;
 }
 .csgo-item--vintage {
-    background: white;
     border: 3px solid #4D7455;
-    border-radius: 8px;
-    margin: 4px;
 }
 .csgo-item--weapon {
-    background: white;
     border: 3px solid black;
-    border-radius: 8px;
-    margin: 4px;
 }
 .csgo-item--bg {
     position: absolute;
