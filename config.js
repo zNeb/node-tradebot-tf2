@@ -31,19 +31,24 @@ module.exports = {
         // Items
         user: {
             key: 1,
-            knife:1,
-            rare_skin: 1,
+            strange:1,
+            genuine: 1,
             weapon: 1,
-            misc: 1,
+            vintage: 1,
             trash: 1,
         },
         bot: {
             key: 1,
-            knife: 1,
-            rare_skin: 1,
+            strange:1,
+            genuine: 1,
             weapon: 1,
-            misc: 1,
+            vintage: 1,
             trash: 1,
         },
+    },
+    stock: {
+        items: 1,
+        key: 10,
+        metal: 100,
     },
 }
