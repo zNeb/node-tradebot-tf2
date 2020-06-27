@@ -123,24 +123,24 @@
                                 </span>
                             </h3>
                         </div>
-                        <div class="csgo-items">
+                        <div class="inv-items">
                             <div class="offer-text">
                                 <strong>&#9660; Select items below to remove them from the offer. &#9660;</strong>
                             </div>
-                            <div class="csgo-item csgo-item--rare"
-                                :class="`csgo-item--${item.item_type.name}`"
+                            <div class="inv-item inv-item--rare"
+                                :class="`inv-item--${item.item_type.name}`"
                                 v-for="item in userInventory"
                                 v-if="userInventorySelected.indexOf(item.assetid) !== -1"
                                 v-on:click="removeItem('user', item.assetid, item.price)"
                             >
-                                <div class="csgo-item--title">{{ item.data.market_hash_name }}</div>
-                                <div class="csgo-item--ke" v-if="item.data.market_hash_name.indexOf('Mann Co. Supply Crate Key') !== -1">KEY</div>
-                                <div class="csgo-item--st" v-if="item.data.market_hash_name.indexOf('Strange') !== -1">ST</div>
-                                <div class="csgo-item--ge" v-if="item.data.market_hash_name.indexOf('Genuine') !== -1">GE</div>
-                                <div class="csgo-item--vi" v-if="item.data.market_hash_name.indexOf('Vintage') !== -1">VI</div>
-                                <div class="csgo-item--wear" v-if="item.item_wear">{{ item.item_wear }}</div>
-                                <div class="csgo-item--price">{{ item.price }} Ref</div>
-                                <div class="csgo-item--bg" :style="`background-image:url(https://steamcommunity-a.akamaihd.net/economy/image/${item.data.image});`"></div>
+                                <div class="inv-item--title">{{ item.data.market_hash_name }}</div>
+                                <div class="inv-item--ke" v-if="item.data.market_hash_name.indexOf('Mann Co. Supply Crate Key') !== -1">KEY</div>
+                                <div class="inv-item--st" v-if="item.data.market_hash_name.indexOf('Strange') !== -1">ST</div>
+                                <div class="inv-item--ge" v-if="item.data.market_hash_name.indexOf('Genuine') !== -1">GE</div>
+                                <div class="inv-item--vi" v-if="item.data.market_hash_name.indexOf('Vintage') !== -1">VI</div>
+                                <div class="inv-item--wear" v-if="item.item_wear">{{ item.item_wear }}</div>
+                                <div class="inv-item--price">{{ item.price }} Ref</div>
+                                <div class="inv-item--bg" :style="`background-image:url(https://steamcommunity-a.akamaihd.net/economy/image/${item.data.image});`"></div>
                             </div>
                             <div class="clearfix"></div>
                         </div>
@@ -169,26 +169,26 @@
                                 </div>
                             </h3>
                         </div>
-                        <div class="csgo-items high">
+                        <div class="inv-items high">
                             <div class="offer-text">
                                 <strong>&#9660; Select items below to place them in the offer. &#9660;</strong>
                             </div>
                             <div v-if=" ! userInventory.error && userInventory.length">
-                                <div class="csgo-item csgo-item--rare"
-                                    :class="`csgo-item--${item.item_type.name}`"
+                                <div class="inv-item inv-item--rare"
+                                    :class="`inv-item--${item.item_type.name}`"
                                     v-for="item in userInventory"
                                     v-if=" ! item.hidden && userInventorySelected.indexOf(item.assetid) === -1"
                                     v-on:click="addItem('user', item.assetid, item.price)"
                                     :hidden="isNaN(item.price)"
                                 >
-                                    <div class="csgo-item--title">{{ item.data.market_hash_name }}</div>
-                                    <div class="csgo-item--ke" v-if="item.data.market_hash_name.indexOf('Mann Co. Supply Crate Key') !== -1">KEY</div>
-                                    <div class="csgo-item--st" v-if="item.data.market_hash_name.indexOf('Strange') !== -1">ST</div>
-                                    <div class="csgo-item--ge" v-if="item.data.market_hash_name.indexOf('Genuine') !== -1">GE</div>
-                                    <div class="csgo-item--vi" v-if="item.data.market_hash_name.indexOf('Vintage') !== -1">VI</div>
-                                    <div class="csgo-item--wear" v-if="item.item_wear">{{ item.item_wear }}</div>
-                                    <div class="csgo-item--price" v-if="item.price">{{ item.price }} Ref</div>
-                                    <div class="csgo-item--bg" :style="`background-image:url(https://steamcommunity-a.akamaihd.net/economy/image/${item.data.image});`"></div>
+                                    <div class="inv-item--title">{{ item.data.market_hash_name }}</div>
+                                    <div class="inv-item--ke" v-if="item.data.market_hash_name.indexOf('Mann Co. Supply Crate Key') !== -1">KEY</div>
+                                    <div class="inv-item--st" v-if="item.data.market_hash_name.indexOf('Strange') !== -1">ST</div>
+                                    <div class="inv-item--ge" v-if="item.data.market_hash_name.indexOf('Genuine') !== -1">GE</div>
+                                    <div class="inv-item--vi" v-if="item.data.market_hash_name.indexOf('Vintage') !== -1">VI</div>
+                                    <div class="inv-item--wear" v-if="item.item_wear">{{ item.item_wear }}</div>
+                                    <div class="inv-item--price" v-if="item.price">{{ item.price }} Ref</div>
+                                    <div class="inv-item--bg" :style="`background-image:url(https://steamcommunity-a.akamaihd.net/economy/image/${item.data.image});`"></div>
                                 </div>
                             </div>
                             <div v-else-if="userInventory.error">
@@ -234,24 +234,24 @@
                                 </span>
                             </h3>
                         </div>
-                        <div class="csgo-items">
+                        <div class="inv-items">
                             <div class="offer-text">
                                 <strong>&#9660; Select items below to remove them from the offer. &#9660;</strong>
                             </div>
-                            <div class="csgo-item csgo-item--rare"
-                                :class="`csgo-item--${item.item_type.name}`"
+                            <div class="inv-item inv-item--rare"
+                                :class="`inv-item--${item.item_type.name}`"
                                 v-for="item in botInventory"
                                 v-if="botInventorySelected.indexOf(item.assetid) !== -1"
                                 v-on:click="removeItem('bot', item.bot, item.assetid, item.price)"
                             >
-                                <div class="csgo-item--title">{{ item.data.market_hash_name }}</div>
-                                <div class="csgo-item--ke" v-if="item.data.market_hash_name.indexOf('Mann Co. Supply Crate Key') !== -1">KEY</div>
-                                <div class="csgo-item--st" v-if="item.data.market_hash_name.indexOf('Strange') !== -1">ST</div>
-                                <div class="csgo-item--ge" v-if="item.data.market_hash_name.indexOf('Genuine') !== -1">GE</div>
-                                <div class="csgo-item--vi" v-if="item.data.market_hash_name.indexOf('Vintage') !== -1">VI</div>
-                                <div class="csgo-item--wear" v-if="item.item_wear">{{ item.item_wear }}</div>
-                                <div class="csgo-item--price">{{ item.price }} Ref</div>
-                                <div class="csgo-item--bg" :style="`background-image:url(https://steamcommunity-a.akamaihd.net/economy/image/${item.data.image});`"></div>
+                                <div class="inv-item--title">{{ item.data.market_hash_name }}</div>
+                                <div class="inv-item--ke" v-if="item.data.market_hash_name.indexOf('Mann Co. Supply Crate Key') !== -1">KEY</div>
+                                <div class="inv-item--st" v-if="item.data.market_hash_name.indexOf('Strange') !== -1">ST</div>
+                                <div class="inv-item--ge" v-if="item.data.market_hash_name.indexOf('Genuine') !== -1">GE</div>
+                                <div class="inv-item--vi" v-if="item.data.market_hash_name.indexOf('Vintage') !== -1">VI</div>
+                                <div class="inv-item--wear" v-if="item.item_wear">{{ item.item_wear }}</div>
+                                <div class="inv-item--price">{{ item.price }} Ref</div>
+                                <div class="inv-item--bg" :style="`background-image:url(https://steamcommunity-a.akamaihd.net/economy/image/${item.data.image});`"></div>
                             </div>
                             <div class="clearfix"></div>
                         </div>
@@ -298,29 +298,29 @@
                                 </div>
                             </h3>
                         </div>
-                        <div class="csgo-items high">
+                        <div class="inv-items high">
                             <div class="offer-text">
                                 <strong>&#9660; Select items below to place them in the offer. &#9660;</strong>
                             </div>
                             <div v-if=" ! botInventory.error && botInventory.length">
-                                <div class="csgo-item csgo-item--rare"
-                                    :class="`csgo-item--${item.item_type.name}`"
+                                <div class="inv-item inv-item--rare"
+                                    :class="`inv-item--${item.item_type.name}`"
                                     v-for="item in botInventory"
                                     v-if=" ! item.hidden && botInventorySelected.indexOf(item.assetid) === -1"
                                     v-on:click="addItem('bot', item.bot, item.assetid, item.price)"
                                     :hidden="isNaN(item.price)"
                                 >
-                                    <div class="csgo-item--title" v-if="!floats[item.assetid] || !floats[item.assetid].paintwear">{{ item.data.market_hash_name }}</div>
-                                    <div class="csgo-item--title" v-else>{{ item.data.market_hash_name }}<br>
-                                        <div class="csgo-item--float">Float: {{ floats[item.assetid].paintwear }}</div>
+                                    <div class="inv-item--title" v-if="!floats[item.assetid] || !floats[item.assetid].paintwear">{{ item.data.market_hash_name }}</div>
+                                    <div class="inv-item--title" v-else>{{ item.data.market_hash_name }}<br>
+                                        <div class="inv-item--float">Float: {{ floats[item.assetid].paintwear }}</div>
                                     </div>
-                                    <div class="csgo-item--ke" v-if="item.data.market_hash_name.indexOf('Mann Co. Supply Crate Key') !== -1">KEY</div>
-                                    <div class="csgo-item--st" v-if="item.data.market_hash_name.indexOf('Strange') !== -1">ST</div>
-                                    <div class="csgo-item--ge" v-if="item.data.market_hash_name.indexOf('Genuine') !== -1">GE</div>
-                                    <div class="csgo-item--vi" v-if="item.data.market_hash_name.indexOf('Vintage') !== -1">VI</div>
-                                    <div class="csgo-item--wear" v-if="item.item_wear">{{ item.item_wear }}</div>
-                                    <div class="csgo-item--price">{{ item.price }} Ref</div>
-                                    <div class="csgo-item--bg" :style="`background-image:url(https://steamcommunity-a.akamaihd.net/economy/image/${item.data.image});`"></div>
+                                    <div class="inv-item--ke" v-if="item.data.market_hash_name.indexOf('Mann Co. Supply Crate Key') !== -1">KEY</div>
+                                    <div class="inv-item--st" v-if="item.data.market_hash_name.indexOf('Strange') !== -1">ST</div>
+                                    <div class="inv-item--ge" v-if="item.data.market_hash_name.indexOf('Genuine') !== -1">GE</div>
+                                    <div class="inv-item--vi" v-if="item.data.market_hash_name.indexOf('Vintage') !== -1">VI</div>
+                                    <div class="inv-item--wear" v-if="item.item_wear">{{ item.item_wear }}</div>
+                                    <div class="inv-item--price">{{ item.price }} Ref</div>
+                                    <div class="inv-item--bg" :style="`background-image:url(https://steamcommunity-a.akamaihd.net/economy/image/${item.data.image});`"></div>
                                 </div>
                             </div>
                             <div v-else-if="botInventory.error">
