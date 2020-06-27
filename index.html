@@ -100,7 +100,7 @@
                             </div>
                         </nav>
                         <hr>
-                        <a href="#" class="btn btn-primary btn-lg btn-block" v-if=" ! disableTrade" v-on:click="sendOffer">← Trade →</a>
+                        <a href="#" class="btn btn-primary btn-lg btn-block" v-if=" ! disableTrade" v-on:click="sendOffer">Trade</a>
                         <a href="#" class="btn btn-danger btn-lg btn-block" disabled v-else>Not enough value</a>
                     </div>
                     <hr>
@@ -117,6 +117,7 @@
                         <div class="panel-heading">
                             <h3 class="panel-title">
                                 <span><strong>Your offer</strong></span>
+                                <a href="#" style="margin:0;text-decoration:none;color:black;" v-on:click="resetUserInventory" v-if=" ! userEmpty">🗘</a>
                                 <span class="price pull-right">
                                     <span>{{ userInventorySelectedValue.toFixed(2) }} Ref</span>
                                 </span>
@@ -228,6 +229,7 @@
                                     <span>{{ botInventorySelectedValue.toFixed(2) }} Ref</span>
                                 </span>
                                 <span class="pull-right">
+                                    <a href="#" style="margin:0;text-decoration:none;color:black;" v-on:click="resetBotInventory" v-if=" ! botEmpty">🗘</a>
                                     <span><strong>Bot's offer</strong></span>
                                 </span>
                             </h3>

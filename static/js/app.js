@@ -17,10 +17,12 @@ $(function() {
             botInventory: [],
             botInventorySelected: [],
             botInventorySelectedValue: 0,
+            botEmpty: true,
             // user
             userInventory: [],
             userInventorySelected: [],
             userInventorySelectedValue: 0,
+            userEmpty: true,
             // auth
             user: false,
             // site
@@ -56,6 +58,7 @@ $(function() {
                     assetid = id;
                 }
                 if(who == 'bot') {
+                    this.botEmpty = false;
                     if(this.selectedBot !== id) {
                         this.activeBot(id);
                     }
@@ -86,6 +89,7 @@ $(function() {
                     }
                     this.botInventorySelectedValue = parseFloat(TotalRef) + parseFloat(TotalScrap);
                 } else {
+                    this.userEmpty = false;
                     var userInventorySelected = this.userInventorySelected;
                     userInventorySelected.push(assetid);
                     this.userInventorySelected = userInventorySelected;
@@ -145,6 +149,9 @@ $(function() {
                         TotalScrap = 0.88;
                     }
                     this.botInventorySelectedValue = parseFloat(TotalRef) + parseFloat(TotalScrap);
+                    if (this.botInventorySelectedValue == 0) {
+                        this.botEmpty = true;
+                    }
                 } else {
                     this.userInventorySelected.splice($.inArray(assetid, this.userInventorySelected),1);
                     this.userInventorySelectedValue -= price;
@@ -172,6 +179,9 @@ $(function() {
                     this.userInventorySelectedValue = parseFloat(TotalRef) + parseFloat(TotalScrap);
                     if(this.userInventorySelectedValue <= 0) {
                         this.userInventorySelectedValue = 0;
+                    }
+                    if (this.userInventorySelectedValue == 0) {
+                        this.userEmpty = true;
                     }
                 }
                 this.checkTradeable();
@@ -257,6 +267,8 @@ $(function() {
             },
             reloadInventories: function() {
                 this.disableReload = true;
+                this.botEmpty = true;
+                this.userEmpty = true;
                 this.botInventory = [];
                 this.botInventorySelected = [];
                 this.botInventorySelectedValue = 0;
@@ -273,10 +285,34 @@ $(function() {
                     eventLabel: this.user.steamID64 || false
                 });
             },
+            resetUserInventory: function() {
+                this.userEmpty = true;
+                this.userInventorySelected = [];
+                this.userInventorySelectedValue = 0;
+
+                ga('send', 'resetUserInventory', {
+                    eventCategory: 'Trade',
+                    eventAction: 'click',
+                    eventLabel: this.user.steamID64 || false
+                });
+            },
+            resetBotInventory: function() {
+                this.botEmpty = true;
+                this.botInventorySelected = [];
+                this.botInventorySelectedValue = 0;
+
+                ga('send', 'resetBotInventory', {
+                    eventCategory: 'Trade',
+                    eventAction: 'click',
+                    eventLabel: this.user.steamID64 || false
+                });
+            },
             sendOffer: function() {
                 if( ! localStorage[this.user.id]) {
                     $('#tradelink').modal('show');
                 } else {
+                    this.botEmpty = true;
+                    this.userEmpty = true;
                     ga('send', 'sendOffer', {
                         eventCategory: 'Trade',
                         eventAction: 'click',
