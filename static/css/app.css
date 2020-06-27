@@ -46,7 +46,8 @@ hr {
     margin: 0;
 }
 .csgo-item {
-    width: 16.6666667%;
+    width: 18%;
+    min-width: 80px;
     min-height: 80px;
     background: rgba(0, 0, 0, .05);
     float: left;
@@ -77,16 +78,34 @@ hr {
     z-index: 999;
 }
 .csgo-item--key {
-    background: rgba(223, 240, 216, .5);
+    background: white;
+    border: 3px solid gold;
+    border-radius: 8px;
+    margin: 4px;
 }
-.csgo-item--knife {
-    background: rgba(242, 222, 222, .5);
+.csgo-item--strange {
+    background: white;
+    border: 3px solid #CF6A32;
+    border-radius: 8px;
+    margin: 4px;
 }
-.csgo-item--rare_skin {
-    background: rgba(252, 248, 227, .5);
+.csgo-item--genuine {
+    background: white;
+    border: 3px solid #4D7455;
+    border-radius: 8px;
+    margin: 4px;
+}
+.csgo-item--vintage {
+    background: white;
+    border: 3px solid #4D7455;
+    border-radius: 8px;
+    margin: 4px;
 }
 .csgo-item--weapon {
-    background: rgba(217, 237, 247, .5);
+    background: white;
+    border: 3px solid black;
+    border-radius: 8px;
+    margin: 4px;
 }
 .csgo-item--bg {
     position: absolute;
@@ -95,10 +114,34 @@ hr {
     background-size: 70%;
     background-repeat: no-repeat;
 }
+.csgo-item--ke {
+    position: absolute;
+    top: 5px; left: 5px;
+    color: gold;
+    font-weight: 700;
+    padding: 1px 3px;
+    z-index: 2;
+}
 .csgo-item--st {
     position: absolute;
     top: 5px; left: 5px;
     color: orange;
+    font-weight: 700;
+    padding: 1px 3px;
+    z-index: 2;
+}
+.csgo-item--ge {
+    position: absolute;
+    top: 5px; left: 5px;
+    color: #4D7455;
+    font-weight: 700;
+    padding: 1px 3px;
+    z-index: 2;
+}
+.csgo-item--vi {
+    position: absolute;
+    top: 5px; left: 5px;
+    color: #476291;
     font-weight: 700;
     padding: 1px 3px;
     z-index: 2;

@@ -68,9 +68,51 @@
             </div>
         </div>
         </nav>
-        <div class="container-fluid" style="min-width:1200px;">
+        <div class="container-fluid">
             <div class="row">
-                <div class="col-xs-5">
+                <!--/.col-->
+                <div class="col-md-2 col-md-push-5">
+                    <hr>
+                    <div v-if=" ! user">
+                        <div class="alert alert-info">
+                            <strong>You need to sign in before you can send trades.</strong>
+                        </div>
+                    </div>
+                    <div v-else>
+                        <nav class="navbar navbar-default">
+                            <div class="container-fluid">
+                                <div class="navbar-header">
+                                    <div class="navbar-brand">Welcome!</div>
+                                </div>
+                                <ul class="nav navbar-nav navbar-left">
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle has-avatar" data-toggle="dropdown">
+                                            <img class="img-responsive img-avatar" :src="user.photos[0].value" alt="Avatar"> {{ user.displayName }}
+                                            <span class="caret"></span>
+                                        </a>
+                                        <ul class="dropdown-menu dropdown-menu-right">
+                                            <li><a href="#" data-toggle="modal" data-target="#tradelink">Change tradelink</a></li>
+                                            <li role="separator" class="divider"></li>
+                                            <li><a href="/logout">Log out</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                        </nav>
+                        <hr>
+                        <a href="#" class="btn btn-primary btn-lg btn-block" v-if=" ! disableTrade" v-on:click="sendOffer">← Trade →</a>
+                        <a href="#" class="btn btn-danger btn-lg btn-block" disabled v-else>Not enough value</a>
+                    </div>
+                    <hr>
+                    <hr>
+                    <a href="#" class="btn btn-success btn-lg btn-block" v-on:click="reloadInventories" v-if=" ! disableReload">Reload inventories</a>
+                    <a href="#" class="btn btn-danger btn-lg btn-block" disabled v-else>Reload inventories</a>
+                    <div class="text-center" style="margin-top: 36px;">
+                        <strong>{{ site.copyrights }}</strong>
+                    </div>
+                </div>
+                <!--/.col-->
+                <div class="col-md-5 col-md-pull-2">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h3 class="panel-title">
@@ -91,7 +133,10 @@
                                 v-on:click="removeItem('user', item.assetid, item.price)"
                             >
                                 <div class="csgo-item--title">{{ item.data.market_hash_name }}</div>
-                                <div class="csgo-item--st" v-if="item.data.market_hash_name.indexOf('StatTrak') !== -1">ST</div>
+                                <div class="csgo-item--ke" v-if="item.data.market_hash_name.indexOf('Mann Co. Supply Crate Key') !== -1">KEY</div>
+                                <div class="csgo-item--st" v-if="item.data.market_hash_name.indexOf('Strange') !== -1">ST</div>
+                                <div class="csgo-item--ge" v-if="item.data.market_hash_name.indexOf('Genuine') !== -1">GE</div>
+                                <div class="csgo-item--vi" v-if="item.data.market_hash_name.indexOf('Vintage') !== -1">VI</div>
                                 <div class="csgo-item--wear" v-if="item.item_wear">{{ item.item_wear }}</div>
                                 <div class="csgo-item--price">{{ item.price }} Ref</div>
                                 <div class="csgo-item--bg" :style="`background-image:url(https://steamcommunity-a.akamaihd.net/economy/image/${item.data.image});`"></div>
@@ -136,7 +181,10 @@
                                     :hidden="isNaN(item.price)"
                                 >
                                     <div class="csgo-item--title">{{ item.data.market_hash_name }}</div>
-                                    <div class="csgo-item--st" v-if="item.data.market_hash_name.indexOf('StatTrak') !== -1">ST</div>
+                                    <div class="csgo-item--ke" v-if="item.data.market_hash_name.indexOf('Mann Co. Supply Crate Key') !== -1">KEY</div>
+                                    <div class="csgo-item--st" v-if="item.data.market_hash_name.indexOf('Strange') !== -1">ST</div>
+                                    <div class="csgo-item--ge" v-if="item.data.market_hash_name.indexOf('Genuine') !== -1">GE</div>
+                                    <div class="csgo-item--vi" v-if="item.data.market_hash_name.indexOf('Vintage') !== -1">VI</div>
                                     <div class="csgo-item--wear" v-if="item.item_wear">{{ item.item_wear }}</div>
                                     <div class="csgo-item--price" v-if="item.price">{{ item.price }} Ref</div>
                                     <div class="csgo-item--bg" :style="`background-image:url(https://steamcommunity-a.akamaihd.net/economy/image/${item.data.image});`"></div>
@@ -172,48 +220,7 @@
                     </div>
                 </div>
                 <!--/.col-->
-                <div class="col-xs-2">
-                    <hr>
-                    <div v-if=" ! user">
-                        <div class="alert alert-info">
-                            <strong>You need to sign in before you can send trades.</strong>
-                        </div>
-                    </div>
-                    <div v-else>
-                        <nav class="navbar navbar-default">
-                            <div class="container-fluid">
-                                <div class="navbar-header">
-                                    <div class="navbar-brand">Welcome!</div>
-                                </div>
-                                <ul class="nav navbar-nav navbar-left">
-                                    <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle has-avatar" data-toggle="dropdown">
-                                            <img class="img-responsive img-avatar" :src="user.photos[0].value" alt="Avatar"> {{ user.displayName }}
-                                            <span class="caret"></span>
-                                        </a>
-                                        <ul class="dropdown-menu dropdown-menu-right">
-                                            <li><a href="#" data-toggle="modal" data-target="#tradelink">Change tradelink</a></li>
-                                            <li role="separator" class="divider"></li>
-                                            <li><a href="/logout">Log out</a></li>
-                                        </ul>
-                                    </li>
-                                </ul>
-                            </div>
-                        </nav>
-                        <hr>
-                        <a href="#" class="btn btn-primary btn-lg btn-block" v-if=" ! disableTrade" v-on:click="sendOffer">← Trade →</a>
-                        <a href="#" class="btn btn-danger btn-lg btn-block" disabled v-else>Not enough value</a>
-                    </div>
-                    <hr>
-                    <hr>
-                    <a href="#" class="btn btn-success btn-lg btn-block" v-on:click="reloadInventories" v-if=" ! disableReload">Reload inventories</a>
-                    <a href="#" class="btn btn-danger btn-lg btn-block" disabled v-else>Reload inventories</a>
-                    <div class="text-center" style="margin-top: 36px;">
-                        <strong>{{ site.copyrights }}</strong>
-                    </div>
-                </div>
-                <!--/.col-->
-                <div class="col-xs-5">
+                <div class="col-md-5">
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <h3 class="panel-title">
@@ -236,7 +243,10 @@
                                 v-on:click="removeItem('bot', item.bot, item.assetid, item.price)"
                             >
                                 <div class="csgo-item--title">{{ item.data.market_hash_name }}</div>
-                                <div class="csgo-item--st" v-if="item.data.market_hash_name.indexOf('StatTrak') !== -1">ST</div>
+                                <div class="csgo-item--ke" v-if="item.data.market_hash_name.indexOf('Mann Co. Supply Crate Key') !== -1">KEY</div>
+                                <div class="csgo-item--st" v-if="item.data.market_hash_name.indexOf('Strange') !== -1">ST</div>
+                                <div class="csgo-item--ge" v-if="item.data.market_hash_name.indexOf('Genuine') !== -1">GE</div>
+                                <div class="csgo-item--vi" v-if="item.data.market_hash_name.indexOf('Vintage') !== -1">VI</div>
                                 <div class="csgo-item--wear" v-if="item.item_wear">{{ item.item_wear }}</div>
                                 <div class="csgo-item--price">{{ item.price }} Ref</div>
                                 <div class="csgo-item--bg" :style="`background-image:url(https://steamcommunity-a.akamaihd.net/economy/image/${item.data.image});`"></div>
@@ -302,7 +312,10 @@
                                     <div class="csgo-item--title" v-else>{{ item.data.market_hash_name }}<br>
                                         <div class="csgo-item--float">Float: {{ floats[item.assetid].paintwear }}</div>
                                     </div>
-                                    <div class="csgo-item--st" v-if="item.data.market_hash_name.indexOf('StatTrak') !== -1">ST</div>
+                                    <div class="csgo-item--ke" v-if="item.data.market_hash_name.indexOf('Mann Co. Supply Crate Key') !== -1">KEY</div>
+                                    <div class="csgo-item--st" v-if="item.data.market_hash_name.indexOf('Strange') !== -1">ST</div>
+                                    <div class="csgo-item--ge" v-if="item.data.market_hash_name.indexOf('Genuine') !== -1">GE</div>
+                                    <div class="csgo-item--vi" v-if="item.data.market_hash_name.indexOf('Vintage') !== -1">VI</div>
                                     <div class="csgo-item--wear" v-if="item.item_wear">{{ item.item_wear }}</div>
                                     <div class="csgo-item--price">{{ item.price }} Ref</div>
                                     <div class="csgo-item--bg" :style="`background-image:url(https://steamcommunity-a.akamaihd.net/economy/image/${item.data.image});`"></div>
@@ -338,21 +351,9 @@
                 <div class="modal-content">
                     <div class="modal-body">
                         <h3>About</h3>
-                        <p>We are trying to get the most accurate prices on the site by analysing the Steam Market. Combined with the Market Rates we can have a stable & varied inventory.</p>
-                        <h4>Example</h4>
-                        <p>Let's say that you have a knife. The Steam market price of that knife is estimated to $50 and we are giving you 90% of the market price(the Market Rate). The mathematics part is going to look like this:</p>
-                        <p class="text-center"><img src="https://i.imgur.com/HOrfH02.png" class="img-responsive" alt=""></p>
-                        <h3>Discounts</h3>
-                        <p>Can be combined (Souvenir worth below 0.5 dollar would have 2 discounts)</p>
-                        <h3>Unaccepted Items</h3>
-                        <ul>
-                            <li>'Too Low': Items worth a below 10 cents is rarely accepted.</li>
-                            <li>'Overstock': We have too many of the specific item.</li>
-                            <li>'Unaccepted': Usually means an unstable market value(Low sell volume / Jumping prices).</li>
-                            <li>'Too High': We don't accept this item because the price is too high price.</li>
-                        </ul>
-                        <h3>Our Cut</h3>
-                        <p>When trading items in the same type(knives to knives) the price will differ with 3-5%. We think this is fair, due to the fact that we are taking risk for every item we trade (values can crash). Also, we lay a lot of time on the bot and we are willing to get a little profit, since this is how trading works!</p>
+                        <p>We are a TF2 trading site that offers the best prices.</p>
+                        <h4>What we trade</h4>
+                        <p>We trade any non-ks item under 100 ref. Our current stock limit is 1 item, except for keys and metal.</p>
                     </div>
                 </div>
             </div>
