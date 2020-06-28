@@ -105,6 +105,7 @@ hr {
     font-weight: 700;
     padding: 1px 3px;
     z-index: 2;
+    user-select: none;
 }
 .inv-item--st {
     position: absolute;
@@ -113,6 +114,7 @@ hr {
     font-weight: 700;
     padding: 1px 3px;
     z-index: 2;
+    user-select: none;
 }
 .inv-item--ge {
     position: absolute;
@@ -121,6 +123,7 @@ hr {
     font-weight: 700;
     padding: 1px 3px;
     z-index: 2;
+    user-select: none;
 }
 .inv-item--vi {
     position: absolute;
@@ -129,6 +132,7 @@ hr {
     font-weight: 700;
     padding: 1px 3px;
     z-index: 2;
+    user-select: none;
 }
 .inv-item--wear {
     position: absolute;
@@ -146,11 +150,6 @@ hr {
     font-weight: 700;
     z-index: 2;
     text-shadow: 1px 0 0 #fff, -1px 0 0 #fff, 0 1px 0 #fff, 0 -1px 0 #fff, 1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
     user-select: none;
 }
 .inv-item--float {
