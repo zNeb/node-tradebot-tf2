@@ -187,7 +187,7 @@ $(function() {
                 this.checkTradeable();
             },
             addMetal: function() {
-                if (this.selectedBot === 'All bots') {this.selectedBot = 'bot_1'}
+                if (this.selectedBot === 'All bots' || this.selectedBot === 'All Bots') {this.selectedBot = 'bot_1'}
                 if (this.userInventorySelectedValue > this.botInventorySelectedValue) {
                     for (i in this.botInventory) {
                         if(this.botInventory[i].data.market_hash_name === 'Refined Metal' && (this.userInventorySelectedValue - this.botInventorySelectedValue) > 0.99) {
