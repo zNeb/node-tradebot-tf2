@@ -186,6 +186,30 @@ $(function() {
                 }
                 this.checkTradeable();
             },
+            addMetal: function() {
+                if (this.selectedBot === 'All bots') {this.selectedBot = 'bot_1'}
+                if (this.userInventorySelectedValue > this.botInventorySelectedValue) {
+                    for (i in this.botInventory) {
+                        if(this.botInventory[i].data.market_hash_name === 'Refined Metal' && (this.userInventorySelectedValue - this.botInventorySelectedValue) > 0.99) {
+                            this.addItem('bot', this.selectedBot, this.botInventory[i].assetid, '1.00');
+                        } else if(this.botInventory[i].data.market_hash_name === 'Reclaimed Metal' && (this.userInventorySelectedValue - this.botInventorySelectedValue) > 0.32) {
+                            this.addItem('bot', this.selectedBot, this.botInventory[i].assetid, '0.33');
+                        } else if(this.botInventory[i].data.market_hash_name === 'Scrap Metal' && (this.userInventorySelectedValue - this.botInventorySelectedValue) > 0.10) {
+                            this.addItem('bot', this.selectedBot, this.botInventory[i].assetid, '0.11');
+                        }
+                    }
+                } else if(this.userInventorySelectedValue < this.botInventorySelectedValue) {
+                    for (i in this.userInventory) {
+                        if(this.userInventory[i].data.market_hash_name === 'Refined Metal' && (this.botInventorySelectedValue - this.userInventorySelectedValue) > 0.99) {
+                            this.addItem('user', undefined, this.userInventory[i].assetid, '1.00');
+                        } else if(this.userInventory[i].data.market_hash_name === 'Reclaimed Metal' && (this.botInventorySelectedValue - this.userInventorySelectedValue) > 0.32) {
+                            this.addItem('user', undefined, this.userInventory[i].assetid, '0.33');
+                        } else if(this.userInventory[i].data.market_hash_name === 'Scrap Metal' && (this.botInventorySelectedValue - this.userInventorySelectedValue) > 0.10) {
+                            this.addItem('user', undefined, this.userInventory[i].assetid, '0.11');
+                        }
+                    }
+                } 
+            },
             checkTradeable: function() {
                 var user = parseFloat(this.userInventorySelectedValue.toFixed(2));
                 var bot = parseFloat(this.botInventorySelectedValue.toFixed(2));
