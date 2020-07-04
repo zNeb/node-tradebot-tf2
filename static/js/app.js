@@ -369,7 +369,7 @@ $(function() {
 
     socket.on('site', function(data) {
         app.site = data;
-        window.document.title = data.header + ' × TF2 Trading Bot';
+        window.document.title = data.header + ' × TF2 Trading Site';
     });
 
     socket.on('offer status', function(data) {
