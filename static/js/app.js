@@ -192,7 +192,6 @@ $(function() {
                     for (i in this.botInventory) {
                         if(this.botInventory[i].data.market_hash_name === 'Refined Metal' && (this.userInventorySelectedValue - this.botInventorySelectedValue) > 0.99 && !(this.botInventorySelected.includes(this.botInventory[i].assetid))) {
                             this.addItem('bot', this.selectedBot, this.botInventory[i].assetid, '1.00');
-                            console.log(this.botInventorySelected)
                         } else if(this.botInventory[i].data.market_hash_name === 'Reclaimed Metal' && (this.userInventorySelectedValue - this.botInventorySelectedValue) > 0.32 && !(this.botInventorySelected.includes(this.botInventory[i].assetid))) {
                             this.addItem('bot', this.selectedBot, this.botInventory[i].assetid, '0.33');
                         } else if(this.botInventory[i].data.market_hash_name === 'Scrap Metal' && (this.userInventorySelectedValue - this.botInventorySelectedValue) > 0.10 && !(this.botInventorySelected.includes(this.botInventory[i].assetid))) {
@@ -207,6 +206,30 @@ $(function() {
                             this.addItem('user', undefined, this.userInventory[i].assetid, '0.33');
                         } else if(this.userInventory[i].data.market_hash_name === 'Scrap Metal' && (this.botInventorySelectedValue - this.userInventorySelectedValue) > 0.10 && !(this.userInventorySelected.includes(this.userInventory[i].assetid))) {
                             this.addItem('user', undefined, this.userInventory[i].assetid, '0.11');
+                        }
+                    }
+                } 
+            },
+            removeMetal: function() {
+                if (this.selectedBot === 'All Bots') {this.selectedBot = 'bot_1'}
+                if (this.userInventorySelectedValue < this.botInventorySelectedValue) {
+                    for (i in this.botInventory) {
+                        if(this.botInventory[i].data.market_hash_name === 'Refined Metal' && (this.botInventorySelectedValue - this.userInventorySelectedValue) > 0.99 && this.botInventorySelected.includes(this.botInventory[i].assetid)) {
+                            this.removeItem('bot', this.selectedBot, this.botInventory[i].assetid, '1.00');
+                        } else if(this.botInventory[i].data.market_hash_name === 'Reclaimed Metal' && (this.botInventorySelectedValue - this.userInventorySelectedValue) > 0.32 && this.botInventorySelected.includes(this.botInventory[i].assetid)) {
+                            this.removeItem('bot', this.selectedBot, this.botInventory[i].assetid, '0.33');
+                        } else if(this.botInventory[i].data.market_hash_name === 'Scrap Metal' && (this.botInventorySelectedValue - this.userInventorySelectedValue) > 0.10 && this.botInventorySelected.includes(this.botInventory[i].assetid)) {
+                            this.removeItem('bot', this.selectedBot, this.botInventory[i].assetid, '0.11');
+                        }
+                    }
+                } else if(this.userInventorySelectedValue > this.botInventorySelectedValue) {
+                    for (i in this.userInventory) {
+                        if(this.userInventory[i].data.market_hash_name === 'Refined Metal' && (this.userInventorySelectedValue - this.botInventorySelectedValue) > 0.99 && this.userInventorySelected.includes(this.userInventory[i].assetid)) {
+                            this.removeItem('user', undefined, this.userInventory[i].assetid, '1.00');
+                        } else if(this.userInventory[i].data.market_hash_name === 'Reclaimed Metal' && (this.userInventorySelectedValue - this.botInventorySelectedValue) > 0.32 && this.userInventorySelected.includes(this.userInventory[i].assetid)) {
+                            this.removeItem('user', undefined, this.userInventory[i].assetid, '0.33');
+                        } else if(this.userInventory[i].data.market_hash_name === 'Scrap Metal' && (this.userInventorySelectedValue - this.botInventorySelectedValue) > 0.10 && this.userInventorySelected.includes(this.userInventory[i].assetid)) {
+                            this.removeItem('user', undefined, this.userInventory[i].assetid, '0.11');
                         }
                     }
                 } 

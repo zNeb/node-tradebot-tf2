@@ -104,7 +104,8 @@
                         <hr>
                         <a href="#" class="btn btn-primary btn-lg btn-block" v-if=" ! disableTrade" v-on:click="sendOffer">Trade</a>
                         <a href="#" class="btn btn-danger btn-lg btn-block" disabled v-else>Not enough value</a>
-                        <a href="#" class="btn btn-primary btn-lg btn-block" v-if=" ! userEmpty || ! botEmpty" v-on:click="addMetal">Add Metal</a>
+                        <a href="#" class="btn btn-primary btn-lg metalAdd" v-if=" ! userEmpty || ! botEmpty" v-on:click="addMetal">+ Metal</a>
+                        <a href="#" class="btn btn-danger btn-lg metalRemove" v-if=" ! userEmpty || ! botEmpty" v-on:click="removeMetal">- Metal</a>
                         <a href="#" class="btn btn-danger btn-lg btn-block" disabled v-else>Add an Item</a>
                     </div>
                     <hr>

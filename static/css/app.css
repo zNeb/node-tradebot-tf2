@@ -218,6 +218,19 @@ hr {
     margin: auto;
 }
 
+.metalAdd {
+    width: 50%;
+    margin-top: 10px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.metalRemove {
+    float: right;
+    width: 50%;
+    margin-top: 10px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
 .inv-items .alert {
     border-radius: 0;
 }
