@@ -112,8 +112,6 @@
                     </div>
                     <hr>
                     <hr>
-                    <a href="#" class="btn btn-success btn-lg btn-block" v-on:click="reloadInventories" v-if=" ! disableReload">Reload inventories</a>
-                    <a href="#" class="btn btn-danger btn-lg btn-block" disabled v-else>Reload inventories</a>
                     <div class="text-center" style="margin-top: 36px;">
                         <strong>{{ site.copyrights }}</strong>
                     </div>
@@ -124,7 +122,7 @@
                         <div class="panel-heading">
                             <h3 class="panel-title">
                                 <span><strong>Your offer</strong></span>
-                                <a href="#" style="margin:0;text-decoration:none;color:black;" v-on:click="resetUserInventory" v-if=" ! userEmpty">🗘</a>
+                                <a href="#" style="margin:0;text-decoration:none;color:black;font-weight:600" v-on:click="resetUserInventory" v-if=" ! userEmpty">×</a>
                                 <span class="price pull-right">
                                     <span>{{ userInventorySelectedValue.toFixed(2) }} Ref</span>
                                 </span>
@@ -173,6 +171,8 @@
                                             </ul>
                                         </div>
                                     </div>
+                                    <a href="#" class="btn btn-default" v-on:click="reloadUserInventory" v-if=" ! disableUserReload">🗘</a>
+                                    <a href="#" class="btn btn-default" disabled v-else>🗘</a>
                                 </div>
                             </h3>
                         </div>
@@ -236,7 +236,7 @@
                                     <span>{{ botInventorySelectedValue.toFixed(2) }} Ref</span>
                                 </span>
                                 <span class="pull-right">
-                                    <a href="#" style="margin:0;text-decoration:none;color:black;" v-on:click="resetBotInventory" v-if=" ! botEmpty">🗘</a>
+                                    <a href="#" style="margin:0;text-decoration:none;color:black;font-weight:600" v-on:click="resetBotInventory" v-if=" ! botEmpty">×</a>
                                     <span><strong>Bot's offer</strong></span>
                                 </span>
                             </h3>
@@ -302,6 +302,8 @@
                                             </ul>
                                         </div>
                                     </div>
+                                    <a href="#" class="btn btn-default" v-on:click="reloadBotInventory" v-if=" ! disableBotReload">🗘</a>
+                                    <a href="#" class="btn btn-default" disabled v-else>🗘</a>
                                 </div>
                             </h3>
                         </div>

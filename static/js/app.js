@@ -8,7 +8,8 @@ $(function() {
                 user: {},
                 bot: {}
             },
-            disableReload: true,
+            disableUserReload: true,
+            disableBotReload: true,
             disableTrade: true,
             // bot
             floats: {},
@@ -313,21 +314,29 @@ $(function() {
                 }
 
             },
-            reloadInventories: function() {
-                this.disableReload = true;
-                this.botEmpty = true;
+            reloadUserInventory: function() {
+                this.disableUserReload = true;
                 this.userEmpty = true;
-                this.botInventory = [];
-                this.botInventorySelected = [];
-                this.botInventorySelectedValue = 0;
                 this.userInventory = [];
                 this.userInventorySelected = [];
                 this.userInventorySelectedValue = 0;
-                socket.emit('get bots inv');
                 if(this.user && typeof this.user.steamID64 !== 'undefined') {
                     socket.emit('get user inv', this.user.steamID64);
                 }
-                ga('send', 'reloadInventories', {
+                ga('send', 'reloadUserInventory', {
+                    eventCategory: 'Trade',
+                    eventAction: 'click',
+                    eventLabel: this.user.steamID64 || false
+                });
+            },
+            reloadBotInventory: function() {
+                this.disableBotReload = true;
+                this.botEmpty = true;
+                this.botInventory = [];
+                this.botInventorySelected = [];
+                this.botInventorySelectedValue = 0;
+                socket.emit('get bots inv');
+                ga('send', 'reloadBotInventory', {
                     eventCategory: 'Trade',
                     eventAction: 'click',
                     eventLabel: this.user.steamID64 || false
@@ -425,7 +434,7 @@ $(function() {
     });
 
     socket.on('user inv', function(data) {
-        app.disableReload = false;
+        app.disableUserReload = false;
         if( ! data.error) {
             var userInventory = [];
             for(var i in data.items) {
@@ -449,7 +458,7 @@ $(function() {
     })
 
     socket.on('bots inv', function(items) {
-        app.disableReload = false;
+        app.disableBotReload = false;
         // Order items object by key name
         const ordered = {};
         Object.keys(items).sort().forEach((key) => {
