@@ -13,7 +13,15 @@ This is a quickly coded website for people who want to see how these kind of web
 I also suggest looking through the code to see how it works, and if you spot an error make a pull request.
 
 # Installation
+```
+install nodejs
+install build-essential
+install git
 
+npm install
+npm i -g pm2
+pm2 start index.js -n "Tradebot"
+```
 Tutorial: [https://steamapis.com/projects/node-csgo-web-tradebot](https://steamapis.com/projects/node-csgo-web-tradebot)
 
 # API Usage
