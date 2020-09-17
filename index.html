@@ -313,7 +313,7 @@
                             </div>
                             <div v-if=" ! botInventory.error && botInventory.length">
                                 <div class="inv-item inv-item--rare"
-                                    :class="`inv-item--${item.item_type.name}`"
+                                    :class="[`inv-item--${item.item_type.name}`, { 'inv-item--uncraft' : item.data.market_hash_name.indexOf('Non-Craftable') !== -1}]"
                                     v-for="item in botInventory"
                                     v-if=" ! item.hidden && botInventorySelected.indexOf(item.assetid) === -1"
                                     v-on:click="addItem('bot', item.bot, item.assetid, item.price)"

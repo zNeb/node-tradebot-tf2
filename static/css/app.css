@@ -76,6 +76,9 @@ hr {
     visibility: visible;
     z-index: 999;
 }
+.inv-item--uncraft {
+    background: #eee;
+}
 .inv-item--key {
     border: 3px solid gold;
 }
