@@ -212,7 +212,7 @@ $(function() {
                 } 
             },
             removeMetal: function() {
-                if (this.botInventorySelected !== undefined || this.botInventorySelected.length != 0) {
+                if (this.botInventorySelected.length !== 0) {
                     for (i in this.botInventory) {
                         if(this.botInventory[i].data.market_hash_name === 'Refined Metal' && this.botInventorySelected.includes(this.botInventory[i].assetid)) {
                             this.removeItem('bot', this.selectedBot, this.botInventory[i].assetid, '1.00');
@@ -223,7 +223,7 @@ $(function() {
                         }
                     }
                 }
-                if (this.userInventorySelected !== undefined || this.userInventorySelected.length != 0) {
+                if (this.userInventorySelected.length !== 0) {
                     for (i in this.userInventory) {
                         if(this.userInventory[i].data.market_hash_name === 'Refined Metal' && this.userInventorySelected.includes(this.userInventory[i].assetid)) {
                             this.removeItem('user', undefined, this.userInventory[i].assetid, '1.00');
