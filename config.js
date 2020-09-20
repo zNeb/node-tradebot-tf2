@@ -3,6 +3,7 @@
 module.exports = {
     appID: 440, // 730 - CS:GO
     contextID: 2, // ContextID
+    botGamesPlayed: 'Fortress.tf',
     bots: {
         bot_1: {
             siteName: 'Bot 1',  // Will be displayed under the "All bots" tab e.g. "Keys Only"
