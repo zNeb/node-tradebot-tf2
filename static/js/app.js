@@ -11,6 +11,7 @@ $(function() {
             disableUserReload: true,
             disableBotReload: true,
             disableTrade: true,
+            hideMetal: false,
             // bot
             floats: {},
             selectedBot: 'All Bots',
@@ -234,6 +235,14 @@ $(function() {
                         }
                     }
                 }
+            },
+            metalToggle: function() {
+                var metalCheck = document.getElementById("hide-metal");
+                if (metalCheck.checked == true){
+                    app.hideMetal = true;
+                  } else {
+                    app.hideMetal = false;
+                  }
             },
             checkTradeable: function() {
                 var user = parseFloat(this.userInventorySelectedValue.toFixed(2));

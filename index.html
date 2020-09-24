@@ -111,6 +111,19 @@
                         <a href="#" class="btn btn-danger btn-lg btn-block" disabled v-else>Add an Item</a>
                     </div>
                     <hr>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" style="box-shadow: none;">
+                            <h3 class="panel-title text-center">Settings</h3>
+                        </div>
+                        <table class="table table-bordered table-condensed text-center">
+                            <tbody>
+                                <tr>
+                                    <td><label for="hide-metal">Hide Metal</label></td>
+                                    <td><input type="checkbox" id="hide-metal" name="hide-metal" v-on:click="metalToggle"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                     <hr>
                     <div class="text-center" style="margin-top: 36px;">
                         <strong>{{ site.copyrights }}</strong>
@@ -186,7 +199,7 @@
                                     v-for="item in userInventory"
                                     v-if=" ! item.hidden && userInventorySelected.indexOf(item.assetid) === -1"
                                     v-on:click="addItem('user', item.assetid, item.price)"
-                                    :hidden="isNaN(item.price)"
+                                    :hidden="isNaN(item.price) || hideMetal === true && item.data.market_hash_name.indexOf('Refined Metal') !== -1 || item.data.market_hash_name.indexOf('Reclaimed Metal') !== -1 || item.data.market_hash_name.indexOf('Scrap Metal') !== -1"
                                 >
                                     <div class="inv-item--title">{{ item.data.market_hash_name }}</div>
                                     <div class="inv-item--ke" v-if="item.data.market_hash_name.indexOf('Mann Co. Supply Crate Key') !== -1">KEY</div>
@@ -317,7 +330,7 @@
                                     v-for="item in botInventory"
                                     v-if=" ! item.hidden && botInventorySelected.indexOf(item.assetid) === -1"
                                     v-on:click="addItem('bot', item.bot, item.assetid, item.price)"
-                                    :hidden="isNaN(item.price)"
+                                    :hidden="isNaN(item.price) || hideMetal === true && item.data.market_hash_name.indexOf('Refined Metal') !== -1 || item.data.market_hash_name.indexOf('Reclaimed Metal') !== -1 || item.data.market_hash_name.indexOf('Scrap Metal') !== -1"
                                 >
                                     <div class="inv-item--title" v-if="!floats[item.assetid] || !floats[item.assetid].paintwear">{{ item.data.market_hash_name }}</div>
                                     <div class="inv-item--title" v-else>{{ item.data.market_hash_name }}<br>

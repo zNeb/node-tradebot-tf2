@@ -13,6 +13,9 @@ hr {
 .price, strong, b {
     font-weight: 700;
 }
+table tbody tr td label {
+    margin-bottom: 0;
+}
 .inv-items {
     width: 100%;
     height: 300px;
