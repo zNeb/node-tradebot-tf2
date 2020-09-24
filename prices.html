@@ -77,76 +77,61 @@
         </nav>
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-12">
+                <div class="col-md-6">
                     <div class="panel panel-default">
-                        <div class="panel-heading">
+                        <div class="panel-heading" style="height:47px;">
                             <h3 class="panel-title">
                                 <div class="form-inline text-right">
-                                    <div class="form-group pull-left">    
-                                    <span>All Bots</span>
+                                    <div class="form-group pull-left" style="margin: 4px;font-weight: bold;">    
+                                        <span>User Pricelist</span>
                                     </div>
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Search For Items" v-on:keyup="searchInventory('bot', $event.target.value)">
-                                        <div class="input-group">
-                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">Sort by
-                                                <span class="caret"></span>
-                                            </button>
-                                            <ul class="dropdown-menu dropdown-menu-right">
-                                                <li>
-                                                    <a v-on:click="setInventorySort('bot', true)">Highest price</a>
-                                                </li>
-                                                <li>
-                                                    <a v-on:click="setInventorySort('bot', false)">Lowest price</a>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <a href="#" class="btn btn-default" v-on:click="reloadBotInventory" v-if=" ! disableBotReload">🗘</a>
-                                    <a href="#" class="btn btn-default" disabled v-else>🗘</a>
+                                    <a href="#" style="height: 20px;"></a>
                                 </div>
                             </h3>
                         </div>
                         <div class="inv-items high">
                             <div class="offer-text">
-                                <strong>&#9660; Select items below to place them in the offer. &#9660;</strong>
+                                <strong>&#9660; Items &#9660;</strong>
                             </div>
-                            <div v-if=" ! botInventory.error && botInventory.length">
-                                <div class="inv-item inv-item--rare"
-                                    :class="[`inv-item--${item.item_type.name}`, { 'inv-item--uncraft' : item.data.market_hash_name.indexOf('Non-Craftable') !== -1}]"
-                                    v-for="item in botInventory"
-                                    v-if=" ! item.hidden && botInventorySelected.indexOf(item.assetid) === -1"
-                                    v-on:click="addItem('bot', item.bot, item.assetid, item.price)"
-                                    :hidden="isNaN(item.price) || hideMetal === true && item.data.market_hash_name.indexOf('Refined Metal') !== -1 || item.data.market_hash_name.indexOf('Reclaimed Metal') !== -1 || item.data.market_hash_name.indexOf('Scrap Metal') !== -1"
+                            <div>
+                                <div class="inv-item inv-item--rare inv-item--weapon"
+                                    :class="{ 'inv-item--uncraft' : index.indexOf('Non-Craftable') !== -1}"
+                                    v-for="(item, index) in buyPriceList"
+                                    :hidden="index.indexOf('Refined Metal') !== -1 || index.indexOf('Reclaimed Metal') !== -1 || index.indexOf('Scrap Metal') !== -1"
                                 >
-                                    <div class="inv-item--title" v-if="!floats[item.assetid] || !floats[item.assetid].paintwear">{{ item.data.market_hash_name }}</div>
-                                    <div class="inv-item--title" v-else>{{ item.data.market_hash_name }}<br>
-                                        <div class="inv-item--float">Float: {{ floats[item.assetid].paintwear }}</div>
-                                    </div>
-                                    <div class="inv-item--ke" v-if="item.data.market_hash_name.indexOf('Mann Co. Supply Crate Key') !== -1">KEY</div>
-                                    <div class="inv-item--st" v-if="item.data.market_hash_name.indexOf('Strange') !== -1">ST</div>
-                                    <div class="inv-item--ge" v-if="item.data.market_hash_name.indexOf('Genuine') !== -1">GE</div>
-                                    <div class="inv-item--vi" v-if="item.data.market_hash_name.indexOf('Vintage') !== -1">VI</div>
-                                    <div class="inv-item--wear" v-if="item.item_wear">{{ item.item_wear }}</div>
-                                    <div class="inv-item--price">{{ item.price }} Ref</div>
-                                    <div class="inv-item--bg" :style="`background-image:url(https://steamcommunity-a.akamaihd.net/economy/image/${item.data.image});`"></div>
+                                    <div class="price-item--title">{{ index }}</div>
+                                    <div class="inv-item--price">{{ item }} Ref</div>
                                 </div>
                             </div>
-                            <div v-else-if="botInventory.error">
-                                <div v-if="botInventory.error.statusCode == 403">
-                                    <div class="alert alert-danger" style="margin:0">
-                                        <strong>This bots profile or inventory settings are set to private. We can't acquire the items of its CS:GO inventory.</strong>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" style="height:47px;">
+                            <h3 class="panel-title">
+                                <div class="form-inline text-right">
+                                    <div class="form-group pull-left" style="margin: 4px;font-weight: bold;">    
+                                        <span>Bot Pricelist</span>
                                     </div>
+                                    <a href="#" style="height: 20px;"></a>
                                 </div>
-                                <div v-else>
-                                    <div class="alert alert-danger">
-                                        <strong v-if="botInventory.error.error">{{ botInventory.error.error }}</strong>
-                                        <strong v-else>Something went wrong.. please try again!</strong>
-                                        <span v-if="botInventory.error.statusCode">({{ botInventory.error.statusCode }})</span>
-                                    </div>
-                                </div>
+                            </h3>
+                        </div>
+                        <div class="inv-items high">
+                            <div class="offer-text">
+                                <strong>&#9660; Items &#9660;</strong>
                             </div>
-                            <div v-else>
-                                <div class="alert alert-info"><img src="/static/img/load.gif" alt="">Please wait..</div>
+                            <div>
+                                <div class="inv-item inv-item--rare inv-item--weapon"
+                                    :class="{ 'inv-item--uncraft' : index.indexOf('Non-Craftable') !== -1}"
+                                    v-for="(item, index) in sellPriceList"
+                                    :hidden="index.indexOf('Refined Metal') !== -1 || index.indexOf('Reclaimed Metal') !== -1 || index.indexOf('Scrap Metal') !== -1"
+                                >
+                                    <div class="price-item--title">{{ index }}</div>
+                                    <div class="inv-item--price">{{ item }} Ref</div>
+                                </div>
                             </div>
                             <div class="clearfix"></div>
                         </div>

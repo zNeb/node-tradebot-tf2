@@ -178,6 +178,17 @@ table tbody tr td label {
     line-height: 1em;
     font-weight: bold;
 }
+.price-item--title {
+    width: 100%;
+    color: #000;
+    text-align: center;
+    padding: 1px 3px;
+    position: absolute;
+    z-index: 1;
+    pointer-events: none;
+    line-height: 1em;
+    font-weight: bold;
+}
 .inv-item--title:after {
     content: " ";
     position: absolute;
