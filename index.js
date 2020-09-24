@@ -53,6 +53,9 @@ app.use('/static', express.static('./static'))
 app.get('/', (req, res) => {
     res.sendFile(`${__dirname}/index.html`)
 })
+app.get('/prices', (req, res) => {
+    res.sendFile(`${__dirname}/prices.html`)
+})
 // Auth Routes
 app.get('/auth/steam', passport.authenticate('steam'))
 app.get('/auth/steam/return', passport.authenticate('steam', { failureRedirect: '/auth/steam' }), (req, res) => {

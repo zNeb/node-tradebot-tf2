@@ -43,6 +43,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav">
+                <li><a class="nav-link" href="/prices">Prices</a></li>
                 <li><a class="nav-link" href="#" data-toggle="modal" data-target="#about">About</a></li>
                 <li><a class="nav-link" href="https://steamcommunity.com/groups/FortressTrade" target="_blank">Steam Group</a><li>
             </ul>
@@ -199,7 +200,7 @@
                                     v-for="item in userInventory"
                                     v-if=" ! item.hidden && userInventorySelected.indexOf(item.assetid) === -1"
                                     v-on:click="addItem('user', item.assetid, item.price)"
-                                    :hidden="isNaN(item.price) || hideMetal === true && item.data.market_hash_name.indexOf('Refined Metal') !== -1 || item.data.market_hash_name.indexOf('Reclaimed Metal') !== -1 || item.data.market_hash_name.indexOf('Scrap Metal') !== -1"
+                                    :hidden="isNaN(item.price) || hideMetal === true && (item.data.market_hash_name.indexOf('Refined Metal') !== -1 || item.data.market_hash_name.indexOf('Reclaimed Metal') !== -1 || item.data.market_hash_name.indexOf('Scrap Metal') !== -1)"
                                 >
                                     <div class="inv-item--title">{{ item.data.market_hash_name }}</div>
                                     <div class="inv-item--ke" v-if="item.data.market_hash_name.indexOf('Mann Co. Supply Crate Key') !== -1">KEY</div>
@@ -330,7 +331,7 @@
                                     v-for="item in botInventory"
                                     v-if=" ! item.hidden && botInventorySelected.indexOf(item.assetid) === -1"
                                     v-on:click="addItem('bot', item.bot, item.assetid, item.price)"
-                                    :hidden="isNaN(item.price) || hideMetal === true && item.data.market_hash_name.indexOf('Refined Metal') !== -1 || item.data.market_hash_name.indexOf('Reclaimed Metal') !== -1 || item.data.market_hash_name.indexOf('Scrap Metal') !== -1"
+                                    :hidden="isNaN(item.price) || hideMetal === true && (item.data.market_hash_name.indexOf('Refined Metal') !== -1 || item.data.market_hash_name.indexOf('Reclaimed Metal') !== -1 || item.data.market_hash_name.indexOf('Scrap Metal') !== -1)"
                                 >
                                     <div class="inv-item--title" v-if="!floats[item.assetid] || !floats[item.assetid].paintwear">{{ item.data.market_hash_name }}</div>
                                     <div class="inv-item--title" v-else>{{ item.data.market_hash_name }}<br>
