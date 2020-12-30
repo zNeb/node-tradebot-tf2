@@ -2,6 +2,8 @@
 
 # Web Based Trading Bot for ~~CS:GO~~ TF2
 
+https://github.com/pepzwee/node-csgo-web-tradebot
+
 [![dependencies](https://img.shields.io/david/pepzwee/node-csgo-web-tradebot.svg)](https://github.com/pepzwee/node-csgo-web-tradebot)
 [![npm](https://img.shields.io/npm/l/express.svg?style=flat-square)](https://github.com/pepzwee/node-csgo-web-tradebot/blob/master/LICENSE)
 [![steam](https://img.shields.io/badge/steam-donate-green.svg?style=flat-square)](https://steamcommunity.com/tradeoffer/new/?partner=78261062&token=2_WUiltH)
